@@ -38,7 +38,7 @@ public class Card {
         setNotification(card1, notification);
 	    
         // create icon for directory chooser
-        setIcon(new JLabel(new ImageIcon("src/tools.png")));
+        setIcon(new JLabel(new ImageIcon("img/tools.png")));
 	    icon.addMouseListener(new MouseAdapter() {
 			private Object successfullyCreatedDirStructure;
 			public void mouseClicked(MouseEvent e)   
@@ -56,15 +56,15 @@ public class Card {
 		            if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 		            	StructureCreator creator = new StructureCreator(chooser, projectName);
 		            	if(creator.getStatus()) {
-		            		JLabel successIcon = new JLabel(new ImageIcon("src/success.jpg"));
+		            		/*JLabel successIcon = new JLabel(new ImageIcon("src/success.jpg"));
 		            		JLabel successNotification = new JLabel("Das Erstellen für " + projectName.getText() + " war erfolgreich.");
 		            		card1.add(successIcon);
-		                    card1.add(successNotification);
+		                    card1.add(successNotification);*/
 		            	} else {
-		            		JLabel failureIcon = new JLabel(new ImageIcon("src/failure.jpg"));
+		            		/*JLabel failureIcon = new JLabel(new ImageIcon("src/failure.jpg"));
 		            		JLabel failureNotification = new JLabel("Das Erstellen für " + projectName.getText() + " ist fehlgeschlagen.");
 		            		card1.add(failureIcon);
-		                    card1.add(failureNotification);
+		                    card1.add(failureNotification);*/
 		            	}
 		            } else {
 		            	System.out.println("NONE");
