@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -38,15 +39,55 @@ public class Card {
         setNotification(card1, notification);
 	    
         // create icon for directory chooser
-        setIcon(new JLabel(new ImageIcon("img/tools.png")));
+        ImageIcon imageIcon = new ImageIcon("img/tools.png");
+        System.out.println(imageIcon.getDescription());
+        
+        // adding button as backup if icon does not show up
+        JButton chooseButton = new JButton("Anlegen in...");
+        chooseButton.addMouseListener(new MouseAdapter() {
+			private Object successfullyCreatedDirStructure;
+			public void mouseClicked(MouseEvent e)   
+	        {   
+				if(projectName.getText().isEmpty()) {
+					/*setIcon(new JLabel(new ImageIcon("src/failure.jpg")));
+            		JLabel notification = new JLabel("Du musst einen Projektnamen angeben.");
+            		setNotification(card1, notification);*/
+				} else {
+		        	JFileChooser chooser = new JFileChooser();
+		            chooser.setCurrentDirectory(new java.io.File("."));
+		            chooser.setDialogTitle("Wähle das Verzeichnis, in dem das Projekt angelegt werden soll.");
+		            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		            chooser.setAcceptAllFileFilterUsed(false);
+		            if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+		            	StructureCreator creator = new StructureCreator(chooser, projectName);
+		            	if(creator.getStatus()) {
+		            		/*JLabel successIcon = new JLabel(new ImageIcon("src/success.jpg"));
+		            		JLabel successNotification = new JLabel("Das Erstellen für " + projectName.getText() + " war erfolgreich.");
+		            		card1.add(successIcon);
+		                    card1.add(successNotification);*/
+		            	} else {
+		            		/*JLabel failureIcon = new JLabel(new ImageIcon("src/failure.jpg"));
+		            		JLabel failureNotification = new JLabel("Das Erstellen für " + projectName.getText() + " ist fehlgeschlagen.");
+		            		card1.add(failureIcon);
+		                    card1.add(failureNotification);*/
+		            	}
+		            } else {
+		            	System.out.println("NONE");
+		            }
+				}
+	        }   
+	    });
+        card1.add(chooseButton);
+        
+        setIcon(new JLabel(imageIcon));
 	    icon.addMouseListener(new MouseAdapter() {
 			private Object successfullyCreatedDirStructure;
 			public void mouseClicked(MouseEvent e)   
 	        {   
 				if(projectName.getText().isEmpty()) {
-					setIcon(new JLabel(new ImageIcon("src/failure.jpg")));
+					/*setIcon(new JLabel(new ImageIcon("src/failure.jpg")));
             		JLabel notification = new JLabel("Du musst einen Projektnamen angeben.");
-            		setNotification(card1, notification);
+            		setNotification(card1, notification);*/
 				} else {
 		        	JFileChooser chooser = new JFileChooser();
 		            chooser.setCurrentDirectory(new java.io.File("."));
